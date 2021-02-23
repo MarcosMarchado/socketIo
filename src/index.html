@@ -90,6 +90,15 @@
             window.scrollTo(0, document.body.scrollHeight);
         });
 
+        socket.on('hello', (msg) => {
+            console.log(`Mensagem > ${msg}`)
+            alert(`Mensagem > ${msg}`)
+        })
+
+        function logOut(){
+            socket.emit('hello')
+        }
+
     </script>
 </body>
 
