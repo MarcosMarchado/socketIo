@@ -6,8 +6,4 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Teste Chat')
-})
-
 export default app

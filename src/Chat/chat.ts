@@ -1,4 +1,4 @@
-import { Socket, Server } from 'socket.io'
+import { Socket, Server, Namespace } from 'socket.io'
 
 
 export function Chat(io: Server, socket: Socket) {
@@ -6,7 +6,7 @@ export function Chat(io: Server, socket: Socket) {
     //Vai receber a msg e depois emitir aos ouvintes
     const sendMessage = (msg: any) => {
         console.log(socket.id)
-        io.emit('chat message', msg);
+        io.of('/chat').emit('chatMessage', msg);
     }
 
     const hello = () => {
@@ -17,7 +17,7 @@ export function Chat(io: Server, socket: Socket) {
         console.log("Disconnected: " + socket.id);
     }
 
-    socket.on("chat message", sendMessage);
+    socket.on("chatMessage", sendMessage);
     socket.on("disconnect", disconnect);;
     socket.on("hello", hello);;
 
