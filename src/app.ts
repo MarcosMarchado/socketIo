@@ -1,9 +1,12 @@
-import express, {Request, Response} from 'express'
+import express, { Request, Response } from 'express'
 
 const app = express()
-//Rotas
 
-app.get('/', (req: Request, res: Response)=>{
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/', (req: Request, res: Response) => {
     res.send('Teste Chat')
 })
 

@@ -1,8 +1,18 @@
-import {Socket,Server} from 'socket.io'
+import { Socket, Server } from 'socket.io'
 
 
-export const Chat = (io:Server  , socket: Socket) => {
-    socket.on('new message', (msg) => {
-        io.emit('new message', msg)
-    })
+export function Chat(io: Server, socket: Socket) {
+
+    const sendMessage = (msg: any) => {
+        console.log(socket.id)
+        io.emit('chat message', msg);
+    }
+
+    const disconnect = () => {
+        console.log("Disconnected: " + socket.id);
+    }
+
+    socket.on("chat message", sendMessage);
+    socket.on("disconnect", disconnect);;
+
 }
