@@ -6,7 +6,8 @@ export function Chat(io: Server, socket: Socket) {
     //Vai receber a msg e depois emitir aos ouvintes
     const sendMessage = (msg: any) => {
         console.log(socket.id)
-        io.of('/chat').emit('chatMessage', msg);
+        console.log(msg)
+        io.of('/chat').emit('chatMessage', msg, socket.id);
     }
 
     const hello = () => {

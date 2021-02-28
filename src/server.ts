@@ -4,15 +4,16 @@ import { Socket, Server } from 'socket.io'
 
 const server = httpServer.createServer(app)
 
-const Io = new Server(server)
+const Io = new Server(server, {
+    cors: {
+        origin: "http://localhost:4200",
+        methods: ["GET", "POST"]
+    }
+})
 
 import { Chat } from './Chat/chat'
 
 const chatNamespace = Io.of('/chat')
-
-// const chatConnection = (socket: Socket) => {
-//     Chat(Io, socket);
-// }
 
 chatNamespace.on("connection", (socket: Socket) => Chat(Io, socket))
 

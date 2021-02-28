@@ -83,9 +83,10 @@
             }
         });
 
-        socket.on('chatMessage', function (msg) {
+        socket.on('chatMessage', function (msg, id) {
             var item = document.createElement('li');
             item.textContent = msg;
+            console.log(`${msg} >> ${id}`)
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
         });
@@ -95,7 +96,7 @@
             alert(`Mensagem > ${msg}`)
         })
 
-        function logOut(){
+        function logOut() {
             socket.emit('hello')
         }
 
