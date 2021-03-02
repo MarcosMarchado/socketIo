@@ -7,7 +7,6 @@ const server = httpServer.createServer(app)
 const Io = new Server(server, {
     cors: {
         origin: "http://localhost:4200",
-        methods: ["GET", "POST"]
     }
 })
 

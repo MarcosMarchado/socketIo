@@ -18,8 +18,13 @@ export function Chat(io: Server, socket: Socket) {
         console.log("Disconnected: " + socket.id);
     }
 
+    const typingMessage = () => {
+        socket.broadcast.emit("typingMessage", socket.id)
+    }
+
     socket.on("chatMessage", sendMessage);
-    socket.on("disconnect", disconnect);;
-    socket.on("hello", hello);;
+    socket.on("disconnect", disconnect);
+    socket.on("typingMessage", typingMessage)
+    socket.on("hello", hello);
 
 }
