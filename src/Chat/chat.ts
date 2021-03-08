@@ -15,6 +15,8 @@ export async function Chat(io: Server, socket: Socket) {
         onlineUsers.push({ socketId: socket.id, userId: user.id, nickname: user.nickname })
         console.log(onlineUsers)
     }
+
+    // console.log(io.of('/chat').sockets)
     //Vai receber a msg e depois emitir aos ouvintes
     const sendMessage = async (msg: any) => {
         io.of('/chat').emit('chatMessage', msg, socket.id, user.id, user.nickname);
@@ -23,9 +25,9 @@ export async function Chat(io: Server, socket: Socket) {
     const disconnect = () => {
         console.log("Disconnected: " + socket.id);
         //Atualizar a lista de pessoas online
-        // const userRemoveId = onlineUsers.findIndex(user => user.socketId == socket.id)
-        // onlineUsers.splice(userRemoveId, 1)
-        // io.of('/chat').emit('onUsers', onlineUsers) //Ao Atualizar a lista será emitido esse evento para todos
+        const userRemoveId = onlineUsers.findIndex(user => user.socketId == socket.id)
+        onlineUsers.splice(userRemoveId, 1)
+        io.of('/chat').emit('onUsers', onlineUsers) //Ao Atualizar a lista será emitido esse evento para todos
     }
 
     const typingMessage = () => {
@@ -46,9 +48,3 @@ export async function Chat(io: Server, socket: Socket) {
 
 }
 
-
-    // const hello = () => {
-    //     socket.broadcast.emit('hello', socket.id)
-    // }
-
-    // socket.send('Hello')
