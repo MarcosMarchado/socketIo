@@ -1,14 +1,16 @@
-import express, { Request, Response } from 'express'
+import express, { json, urlencoded } from 'express'
 import cors from 'cors'
 
 const app = express()
+app.use(urlencoded({ extended: true }))
+app.use(json())
+
+import userRoute from './controllers/userController'
 
 app.use(cors({
     origin: "http://localhost:4200",
 }))
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
+app.use(userRoute)
 
 export default app

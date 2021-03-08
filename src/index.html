@@ -69,7 +69,9 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
-        var socket = io('/chat');
+        var socket = io('/chat', {
+            query: "tokennnn"
+        });
 
         var messages = document.getElementById('messages');
         var form = document.getElementById('form');
